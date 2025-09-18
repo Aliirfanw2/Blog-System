@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card shadow-lg">
+        <div class="card-body">
+          <h2 class="mb-4 text-center text-primary">Edit Profile</h2>
+          <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="mb-3 text-center">
+              <img src="https://ui-avatars.com/api/?name={{ user.username }}&background=0D8ABC&color=fff&size=100" alt="Avatar" class="rounded-circle mb-2" style="width: 100px; height: 100px; object-fit: cover;">
+            </div>
+            <div class="mb-3">
+              <label for="username" class="form-label">Username</label>
+              <input type="text" class="form-control" id="username" name="username" value="{{ user.username }}" required>
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" class="form-control" id="email" name="email" value="{{ user.email }}" required>
+            </div>
+            <hr>
+            <div class="mb-3">
+              <label for="password1" class="form-label">New Password</label>
+              <input type="password" class="form-control" id="password1" name="password1" placeholder="Enter new password">
+            </div>
+            <div class="mb-3">
+              <label for="password2" class="form-label">Confirm New Password</label>
+              <input type="password" class="form-control" id="password2" name="password2" placeholder="Confirm new password">
+              <div class="form-text">Leave blank if you do not want to change your password.</div>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Update Profile</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

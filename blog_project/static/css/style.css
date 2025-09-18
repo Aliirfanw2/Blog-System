@@ -1,0 +1,42 @@
+/* Default theme styles */
+body {
+    background-color: #f8f9fa;
+    color: #212529;
+}
+
+/* Dark theme styles */
+body.dark-theme {
+    background-color: #181a1b;
+    color: #e4e6eb;
+}
+.card.dark-theme, .bg-dark.dark-theme {
+    background-color: #23272b !important;
+    color: #e4e6eb !important;
+}
+
+/* Add more dark theme overrides as needed */
+
+/* Utility for transition */
+body, .card {
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Footer hover effects */
+.footer-link {
+    transition: color 0.2s, text-decoration 0.2s;
+}
+.footer-link:hover {
+    color: #0d6efd !important;
+    text-decoration: underline;
+}
+footer .bi {
+    transition: color 0.2s, transform 0.2s;
+}
+footer .bi:hover {
+    color: #0d6efd !important;
+    transform: scale(1.2);
+}
+footer .text-info:hover { color: #0dcaf0 !important; }
+footer .text-warning:hover { color: #ffc107 !important; }
+footer .text-success:hover { color: #198754 !important; }
+footer .text-light:hover { color: #f8f9fa !important; }

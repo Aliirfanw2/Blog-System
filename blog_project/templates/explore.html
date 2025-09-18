@@ -1,0 +1,32 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/explore_hover.css' %}">
+<div class="container mt-5">
+    <h2 class="mb-4 text-center text-primary">Explore All Blog Posts</h2>
+    <div class="row">
+        {% if posts %}
+            {% for post in posts %}
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ post.title }}</h5>
+                            <p class="card-text text-muted">by {{ post.author }} | {{ post.created_at|date:"M d, Y" }}</p>
+                            <p class="card-text">{{ post.summary|truncatewords:25 }}</p>
+                            <a href="{% url 'post_detail' post.id %}" class="btn btn-outline-primary btn-sm">Read More</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="col-12">
+                <div class="alert alert-info text-center">
+                    No blog posts found. Be the first to <a href="{% url 'post_create' %}">create one!</a>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

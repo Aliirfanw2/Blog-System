@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <div class="card shadow-lg border-0">
+                <div class="card-body p-5">
+                    <h2 class="card-title text-center mb-4 text-primary fw-bold">
+                        ✍️ Add New Blog Post
+                    </h2>
+                    <p class="text-center text-muted mb-5">
+                        Share your thoughts with the world. Fill in the details below and publish your blog post.
+                    </p>
+
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+
+                        <!-- Title -->
+                        <div class="mb-4">
+                            <label for="title" class="form-label fw-semibold">
+                                <i class="fas fa-heading me-2 text-primary"></i>Title
+                            </label>
+                            <input type="text" name="title" id="title" class="form-control form-control-lg rounded-3"
+                                   placeholder="Enter blog title" required>
+                        </div>
+
+                        <!-- Summary -->
+                        <div class="mb-4">
+                            <label for="summary" class="form-label fw-semibold">
+                                <i class="fas fa-align-left me-2 text-primary"></i>Summary
+                            </label>
+                            <textarea name="summary" id="summary" rows="2"
+                                      class="form-control rounded-3" placeholder="Short summary of your post"
+                                      required></textarea>
+                        </div>
+
+                        <!-- Content -->
+                        <div class="mb-4">
+                            <label for="content" class="form-label fw-semibold">
+                                <i class="fas fa-file-alt me-2 text-primary"></i>Content
+                            </label>
+                            <textarea name="content" id="content" rows="8"
+                                      class="form-control rounded-3" placeholder="Write your full blog content here..."
+                                      required></textarea>
+                        </div>
+
+                        <!-- Two-column fields -->
+                        <div class="row">
+                            <!-- Tags -->
+                            <div class="col-md-6 mb-4">
+                                <label for="tags" class="form-label fw-semibold">
+                                    <i class="fas fa-tags me-2 text-primary"></i>Tags
+                                </label>
+                                <input type="text" name="tags" id="tags"
+                                       class="form-control rounded-pill"
+                                       placeholder="e.g. tech, travel, lifestyle">
+                            </div>
+
+                            <!-- Author -->
+                            <div class="col-md-6 mb-4">
+                                <label for="author" class="form-label fw-semibold">
+                                    <i class="fas fa-user me-2 text-primary"></i>Author
+                                </label>
+                                <input type="text" name="author" id="author"
+                                       class="form-control rounded-pill bg-light"
+                                       value="{{ request.user.username }}" readonly>
+                            </div>
+
+                            <!-- Date -->
+                            <div class="col-md-6 mb-4">
+                                <label for="date" class="form-label fw-semibold">
+                                    <i class="fas fa-calendar-alt me-2 text-primary"></i>Date
+                                </label>
+                                <input type="date" name="date" id="date"
+                                       class="form-control rounded-pill"
+                                       value="{{ today|date:'Y-m-d' }}">
+                            </div>
+
+                            <!-- Status -->
+                            <div class="col-md-6 mb-4">
+                                <label for="status" class="form-label fw-semibold">
+                                    <i class="fas fa-toggle-on me-2 text-primary"></i>Status
+                                </label>
+                                <select name="status" id="status" class="form-select rounded-pill">
+                                    <option value="published">Published</option>
+                                    <option value="draft">Draft</option>
+                                </select>
+                            </div>
+
+                            <!-- Theme -->
+                        </div>
+
+                        <!-- Upload Image -->
+                        <div class="mb-5">
+                            <label for="image" class="form-label fw-semibold">
+                                <i class="fas fa-image me-2 text-primary"></i>Upload Image
+                            </label>
+                            <input type="file" name="image" id="image" class="form-control">
+                            <small class="text-muted">Optional – add a cover image for your blog post.</small>
+                        </div>
+
+                        <!-- Submit button -->
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-success btn-lg rounded-pill shadow-sm">
+                                🚀 Publish Post
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,42 @@
+body {
+    background: #f7f7f7;
+    color: #222;
+    font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+    transition: background 0.5s;
+}
+
+
+
+
+.card.shadow-lg, .card.border-info, .card.border-success, .card.border-warning {
+    transition: transform 0.25s cubic-bezier(.25,.8,.25,1), box-shadow 0.25s, background 0.25s;
+    background: #fff;
+    border-radius: 1rem;
+    box-shadow: 0 2px 8px rgba(34,34,59,0.08);
+    border: none;
+    color: #222;
+}
+.card.shadow-lg:hover, .card.border-info:hover, .card.border-success:hover, .card.border-warning:hover {
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 8px 24px rgba(34,34,59,0.12);
+    border: 1.5px solid #ffe066;
+    background: #f9f9f9;
+    color: #222;
+}
+.card-header.bg-info, .card-header.bg-success, .card-header.bg-warning {
+    background: #ffe066;
+    color: #222;
+}
+.btn-outline-info.btn-sm, .btn-success.btn-lg, .btn-outline-primary.btn-lg {
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
+    border-radius: 2rem;
+    color: #222;
+    border-color: #ffe066;
+    background: #fff;
+}
+.card:hover .btn-outline-info.btn-sm, .card:hover .btn-success.btn-lg, .card:hover .btn-outline-primary.btn-lg {
+    background: #ffe066;
+    color: #222;
+    border-color: #ffe066;
+    box-shadow: 0 2px 8px #ffe066;
+}

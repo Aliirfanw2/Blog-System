@@ -1,0 +1,13 @@
+/* Hover effect for post view and comments section */
+.post-view-section:hover {
+  box-shadow: 0 0 16px 0 rgba(13,138,188,0.15), 0 2px 8px 0 rgba(0,0,0,0.08);
+  border-color: #0d8abc;
+  background: #f0f8ff;
+  transition: all 0.2s;
+}
+.comment-card:hover {
+  box-shadow: 0 0 12px 0 rgba(25,135,84,0.15), 0 2px 8px 0 rgba(0,0,0,0.08);
+  border-color: #198754;
+  background: #f8fff8;
+  transition: all 0.2s;
+}
