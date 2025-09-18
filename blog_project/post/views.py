@@ -1,3 +1,8 @@
+from django.http import HttpResponseRedirect
+
+def legacy_post_detail(request, post_id):
+    post = get_object_or_404(Post, id=post_id)
+    return HttpResponseRedirect(post.get_absolute_url())
 from django.shortcuts import render, get_object_or_404
 from django.shortcuts import redirect
 from django.contrib import messages
@@ -22,8 +27,8 @@ def explore(request):
     return render(request, 'explore.html', {'posts': posts})
 
 
-def post_detail(request, post_id):
-    post = get_object_or_404(Post, id=post_id)
+def post_detail(request, slug):
+    post = get_object_or_404(Post, slug=slug)
     post.increment_views()
     meta_description = post.summary if hasattr(post, 'summary') and post.summary else post.title
     meta_keywords = ', '.join([tag.name for tag in post.tags.all()])
@@ -67,20 +72,28 @@ def add_post(request):
             slug = f"{base_slug}-{counter}"
             counter += 1
 
+        # Handle category
+        category = None
+        if category_id:
+            try:
+                category = Category.objects.get(id=category_id)
+            except Category.DoesNotExist:
+                messages.error(request, "Selected category does not exist.")
+                return redirect('add_post')
+
         # Create post
         post = Post(
             title=title,
             summary=summary,
             content=content,
             author=request.user,
-            category=Category.objects.get(id=category_id) if category_id else None,
+            category=category,
             image=image if image else None,
             status=status,
             slug=slug
         )
         if date:
             post.created_at = date
-            # Ensure user has a profile
         post.save()
 
         # Assign tags (comma separated)
@@ -91,7 +104,7 @@ def add_post(request):
                 post.tags.add(tag_obj)
 
         messages.success(request, "Post created successfully!")
-        return redirect('post_detail', post_id=post.id)
+        return redirect('post_detail', slug=post.slug)
     return render(request, 'add_post.html')
 
 
@@ -100,13 +113,13 @@ def like_post(request, post_id):
     post = get_object_or_404(Post, id=post_id)
     if post.author == request.user:
         messages.error(request, "You cannot like your own post.")
-        return redirect('post_detail', post_id=post.id)
+        return redirect('post_detail', slug=post.slug)
     like, created = Like.objects.get_or_create(post=post, user=request.user)
     if not created:
         messages.info(request, "You have already liked this post.")
     else:
         messages.success(request, "You liked this post!")
-    return redirect('post_detail', post_id=post.id)
+    return redirect('post_detail', slug=post.slug)
 
 
 @login_required
@@ -116,7 +129,7 @@ def add_comment(request, post_id):
         text = request.POST.get('comment', '').strip()
         if text:
             Comment.objects.create(post=post, author=request.user, text=text)
-    return redirect('post_detail', post_id=post.id)
+    return redirect('post_detail', slug=post.slug)
 
 
 # Update dashboard logic to show likes, views, comments
@@ -206,7 +219,7 @@ def edit_post(request, post_id):
             post.image = image
         post.save()
         messages.success(request, "Post updated successfully!")
-        return redirect('post_detail', post_id=post.id)
+    return redirect('post_detail', slug=post.slug)
     return render(request, 'edit_post.html', {'post': post})
 
 

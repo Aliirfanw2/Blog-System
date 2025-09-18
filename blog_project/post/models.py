@@ -30,6 +30,9 @@ class Tag(models.Model):
 
 
 class Post(models.Model):
+    def get_absolute_url(self):
+        from django.urls import reverse
+        return reverse('post_detail', kwargs={'slug': self.slug})
     STATUS_CHOICES = (
         ("draft", "Draft"),
         ("published", "Published"),

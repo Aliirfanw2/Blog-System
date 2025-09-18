@@ -1,3 +1,11 @@
+/* Extra hover effect for post list items on home page */
+.post-list-hover:hover {
+    box-shadow: 0 8px 24px rgba(34,34,59,0.12);
+    border: 1.5px solid #ffe066;
+    background: #f9f9f9;
+    color: #222;
+    transition: all 0.2s;
+}
 body {
     background: #f7f7f7;
     color: #222;

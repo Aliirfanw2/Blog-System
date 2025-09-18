@@ -18,11 +18,13 @@
       <div class="card shadow-lg border-0 mb-5" style="background: #f8f9fa;">
         <div class="card-body p-5 post-view-section">
           <!-- Large Cover Image -->
-          {% if post.image %}
-            <div class="mb-4 text-center">
+          <div class="mb-4 text-center">
+            {% if post.image %}
               <img src="{{ post.image.url }}" class="img-fluid rounded-3 shadow" style="max-width:400px;max-height:300px;object-fit:cover;" alt="Post Image">
-            </div>
-          {% endif %}
+            {% else %}
+              <img src="{% static 'img/default_post.png' %}" class="img-fluid rounded-3 shadow" style="max-width:400px;max-height:300px;object-fit:cover;" alt="No Image Available">
+            {% endif %}
+          </div>
           <!-- Minimal Header -->
           <header class="mb-4 text-center">
             <h1 class="display-4 fw-bold" style="letter-spacing:1px; font-family: 'Merriweather', serif;">{{ post.title }}</h1>
