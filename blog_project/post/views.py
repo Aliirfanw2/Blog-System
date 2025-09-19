@@ -219,9 +219,9 @@ def edit_post(request, post_id):
             post.image = image
         post.save()
         messages.success(request, "Post updated successfully!")
-    return redirect('post_detail', slug=post.slug)
     return render(request, 'edit_post.html', {'post': post})
-
+    return redirect('post_detail', slug=post.slug)
+    
 
 @login_required
 def edit_profile(request):

@@ -10,7 +10,7 @@ from django.http import HttpResponse
 
 from post.models import Post
 
-@login_required
+
 def home(request):
     posts = Post.objects.filter(status="published").order_by('-created_at')[:1]  # latest 1 post
     total_posts = Post.objects.filter(status="published").count()
